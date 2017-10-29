@@ -26,13 +26,13 @@ onCreate\(\)-&gt;onStart\(\)-&gt;onResume\(\)-&gt;onPause\(\)-&gt;onStop\(\)-&gt
 
 \(4\) onResume\(\):表示Activity**已经可见了，并且出现在前台并开始活动**。需要和onStart\(\)对比，onStart的时候Activity还在后台，onResume的时候Activity才显示到前台。
 
-\(5\) onPause\(\):表示 Activity正在停止，仍可见，正常情况下，紧接着onStop就会被调用。在特殊情况下，如果这个时候快速地回到当前Activity，那么onResume就会被调用（极端情况）。**onPause中不能进行耗时操作，会影响到新Activity的显示。因为onPause必须执行完，新的Activity的onResume才会执行。**
+\(5\) onPause\(\):表示 Activity正在停止，仍可见，正常情况下，紧接着onStop就会被调用。在特殊情况下，如果这个时候快速地回到当前Activity，那么onResume就会被调用（极端情况）。另一个特殊情况是新开的Activity可被视为半透明的遮罩，那么前一个Activity就会停留在onPause的阶段。**onPause中不能进行耗时操作，会影响到新Activity的显示。因为onPause必须执行完，新的Activity的onResume才会执行。**
 
 \(6\) onStop\(\):表示Activity即将停止，不可见，位于后台。可以做稍微重量级的回收工作，同样不能太耗时。
 
 \(7\) onDestory\(\):表示Activity即将销毁，这是Activity生命周期的最后一个回调，可以做一些回收工作和最终的资源回收。
 
-在平常的开发中，我们经常用到的就是 onCreate\(\)和onDestory\(\)，做一些初始化和回收操作。
+在平常的开发中，我们经常用到的就是 onCreate\(\)和onDestory\(\)，做一些初始化和回收操作。记住几个关键词：**存在**、**可见**、**可操作**。
 
 ##### 生命周期的几种普通情况
 
@@ -218,7 +218,7 @@ Activity的管理是采用任务栈的形式，任务栈采用“后进先出”
 
 
 
-**应用场景：**呼叫来电界面。这种模式的使用情况比较罕见，在Launcher中可能使用。或者你确定你需要使Activity只有一个实例。建议谨慎使用。
+**应用场景：**呼叫来电界面。这种模式的使用情况比较罕见，在Launcher中可能使用。或者你确定你需要使Activity只有一个实例。建议谨慎使用。全局的推送弹窗页面也可以使用该模式，确保不同栈内的Activity弹出的都是统一的弹窗。
 
 ### 3.特殊情况——前台栈和后台栈的交互
 
