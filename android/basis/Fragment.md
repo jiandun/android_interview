@@ -30,6 +30,18 @@ Fragment比Activity多了几个生命周期的回调方法
 
 PS：注意：除了onCreateView，其他的所有方法如果你重写了，必须调用父类对于该方法的实现
 
+
+一个ViewPager配合多个Fragment时候的生命周期详解
+
+- Activity的onCreate、onStart和onResume先执行
+**setOffscreenPageLimit配置的值为X，默认是1，设置为0等价于1**
+- 根据X的值，调用1+X个Fragment的setUserVisibleHint方法，参数为false，再调用一次第一个Fragment的setUserVisibleHint，参数为true
+- 调用1+X个Fragment的onAttach和onCreate方法
+- 调用第一个Fragment的onCreateView、onViewCreated、onActivityCreated、onStart和onResume
+- 再依次调用X个Fragment的onCreateView到onResume方法
+
+比较良好的做法是设置两个flag，分别对应当前Fragment是否可见和onViewCreated是否执行，并在具体的执行方法加上两个flag都必须为true才执行的逻辑。
+
 ### 3. Fragment的使用方式
 
 **静态使用Fragment**
