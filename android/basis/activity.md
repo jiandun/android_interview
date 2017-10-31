@@ -255,3 +255,11 @@ Activity的Flags很多，这里介绍集中常用的，用于设定Activity的�
 **\(3\)FLAG\_ACTIVITY\_CLEAR\_TOP**  
 具有此标记位的Activity，当它启动时，在同一个任务栈中所有位于它上面的Activity都要出栈。如果和singleTask模式一起出现，若被启动的Activity已经存在栈中，则清除其之上的Activity，并调用该Activity的onNewIntent方法。如果被启动的Activity采用standard模式，那么该Activity连同之上的所有Activity出栈，然后创建新的Activity实例并压入栈中。
 
+#### 5.应用退出和登出
+
+以登出为例，正常情况下APP需要清除站内所用的非首页的Activity，然后显示首页并且刷新页面。
+
+**\(1\)FLAG\_ACTIVITY\_SINGLE\_TASK和SingleTask模式**
+
+**\(2\)全局广播**
+在Activity基类里面注册监听事件，收到登出事件的时候除首页都调用finish，首页刷新自己。
