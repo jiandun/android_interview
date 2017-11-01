@@ -6,6 +6,8 @@ IntentService是Android里面的一个封装类，继承自四大组件之一的
 
 处理异步请求，实现多线程
 
+[例子](http://www.jianshu.com/p/332b6daf91f0)
+
 ## 三、 工作流程
 
 ![](http://upload-images.jianshu.io/upload_images/944365-fa5bfe6dffa531ce.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
